@@ -1,0 +1,281 @@
+1.program:
+package main
+import "fmt"
+func main() { 
+   var a int = 400
+   var b int = 687
+   var ret int
+   ret = max(a, b)
+   fmt.Printf( "Max value is : %d\n", ret )
+}
+/* function returning the max between two numbers */
+func max(num1, num2 int) int{
+
+   var result int
+
+   if (num1 > num2) {
+      result = num1
+   } else {
+      result = num2
+   }
+   return result 
+}
+output:
+Max value is : 687
+
+2.program:
+package main
+import "fmt"
+func swap(x, y string) (string, string) {
+   return y, x
+}
+func main() {
+   a, b := swap("chowdary", "haritha")
+   fmt.Println(a, b)
+}
+output:
+haritha chowdary
+
+3.program:
+package main
+import "fmt" 
+func area(length, width int)int{
+     
+    Ar := length* width
+    return Ar
+}
+ 
+// Main function
+func main() {
+   
+   fmt.Printf("Area of rectangle is : %d", area(19, 40))
+}
+output:
+Area of rectangle is : 760
+
+4.program:
+package main  
+import "fmt"
+func swap(a, b int)int{
+ 
+    var c int
+    c= a
+    a=b
+    b=c
+    
+   return c 
+}
+  
+// Main function
+func main() {
+ var p int = 30
+ var q int = 40
+  fmt.Printf("p = %d and q = %d", p, q)
+  
+ // call by values
+ swap(p, q)
+   fmt.Printf("\np = %d and q = %d",p, q)
+}
+output:
+p = 30 and q = 40
+p = 30 and q = 40
+
+5.program:
+package main 
+import "fmt"
+func swap(a, b *int)int{
+    var c int
+    c = *a
+    *a = *b
+    *b = c
+     
+   return c
+}
+  
+// Main function
+func main() {
+ 
+ var p int = 50
+ var q int = 40
+ fmt.Printf("p = %d and q = %d", p, q)
+  
+ // call by reference
+ swap(&p, &q)
+   fmt.Printf("\np = %d and q = %d",p, q)
+}
+output:
+p = 50 and q = 40
+p = 40 and q = 50
+
+6.program
+package main
+import "fmt"
+type First func(int) int
+type Second func(int) First
+
+func squareSum(x int) Second {
+	return func(y int) First {
+		return func(z int) int {
+			return x*x + y*y + z*z
+		}
+	}
+}
+
+func main() {
+	
+	fmt.Println(squareSum(8)(6)(4))
+}
+output:
+116
+
+7.program:
+package main
+import "fmt"
+func sum(x, y int) int {
+	return x + y
+}
+func partialSum(x int) func(int) int {
+	return func(y int) int {
+		return sum(x, y)
+	}
+}
+func main() {
+	partial := partialSum(5)
+	fmt.Println(partial(8))
+}
+output:
+13
+
+8.program
+package main
+import "fmt"
+func main() {
+	for i := 22.0; i < 90; i += 22.0 {
+		rad := func() float64 {
+			return i * 39.370
+		}()
+		fmt.Printf("%.2f Meter = %.2f Inch\n", i, rad)
+	}
+}
+output:
+22.00 Meter = 866.14 Inch
+44.00 Meter = 1732.28 Inch
+66.00 Meter = 2598.42 Inch
+88.00 Meter = 3464.56 Inch
+
+9.program:
+package main
+import "fmt"
+func main() {
+	l := 40
+	b := 60
+
+	func() {
+		var area int
+		area = l * b
+		fmt.Println(area)
+	}()
+}
+output:
+2400
+
+10.program
+package main
+import "fmt"
+func main() {
+
+    sum := func(a, b, c int) int {
+        return a + b + c
+    }(8, 9, 6)
+
+    fmt.Println("5+3+7 =", sum)
+}
+output:
+5+3+7 = 23
+
+11.program:
+package main
+
+import "fmt"
+
+func fact(n int) int {
+
+    if n == 0 || n == 1 {
+        return 1
+    }
+
+    return n * fact(n-1)
+}
+
+func main() {
+
+    fmt.Println(fact(9))
+    fmt.Println(fact(8))
+    fmt.Println(fact(4))
+}
+output:
+362880
+40320
+24
+
+12.program:
+package main
+
+import "fmt"
+
+func inc(x int) int {
+    x++
+    return x
+}
+
+func dec(x int) int {
+    x--
+    return x
+}
+
+func apply(x int, f func(int) int) int {
+
+    r := f(x)
+    return r
+}
+
+func main() {
+    r1 := apply(8, inc)
+    r2 := apply(7, dec)
+    fmt.Println(r1)
+    fmt.Println(r2)
+}
+output:
+9
+6
+
+13.program:
+package main
+import (  
+    "fmt"
+)
+
+func appendStr() func(string) string {  
+    t := "Hello"
+    c := func(b string) string {
+        t = t + " " + b
+        return t
+    }
+    return c
+}
+
+func main() {  
+    a := appendStr()
+    b := appendStr()
+    fmt.Println(a("World"))
+    fmt.Println(b("Everyone"))
+
+    fmt.Println(a("haritha"))
+    fmt.Println(b("!"))
+}
+output:
+Hello World
+Hello Everyone
+Hello World haritha
+Hello Everyone !
+
